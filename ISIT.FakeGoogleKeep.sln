@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISIT.FakeGoogleKeep", "ISIT.FakeGoogleKeep\ISIT.FakeGoogleKeep.csproj", "{41B3E7DF-CEAA-4E8A-A84C-9E218BF73BF4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41B3E7DF-CEAA-4E8A-A84C-9E218BF73BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41B3E7DF-CEAA-4E8A-A84C-9E218BF73BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41B3E7DF-CEAA-4E8A-A84C-9E218BF73BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41B3E7DF-CEAA-4E8A-A84C-9E218BF73BF4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61EAB58C-2C0A-40DF-94CF-BC02159484E0}
+	EndGlobalSection
+EndGlobal

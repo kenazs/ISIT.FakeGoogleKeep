@@ -1,0 +1,57 @@
+﻿using ISIT.FakeGoogleKeep.Data;
+using ISIT.FakeGoogleKeep.Models.Domain;
+using ISIT.FakeGoogleKeep.Services.Contracts;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ISIT.FakeGoogleKeep.Services.Implementations
+{
+    public class TodoItemService : ITodoItemService
+    {
+        private readonly ApplicationDbContext _context;
+
+        public TodoItemService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<bool> AddItemAsync(TodoItem newItem, IdentityUser user)
+        {
+            newItem.Id = Guid.NewGuid();
+            newItem.OwnerId = user.Id;
+            newItem.IsDone = false;
+            newItem.DueAt = DateTimeOffset.Now.AddDays(3);
+
+            _context.Items.Add(newItem);
+
+            var saveResult = await _context.SaveChangesAsync();
+            return saveResult == 1;
+        }
+
+        public async Task<TodoItem[]> GetIncompleteItemsAsync(IdentityUser user)
+        {
+            return await _context
+                .Items
+                .Where(x => x.IsDone == false && x.OwnerId == user.Id)
+                .ToArrayAsync();
+        }
+
+        public async Task<bool> MarkDoneAsync(Guid id, IdentityUser user)
+        {
+            var item = await _context
+                .Items
+                .Where(x => x.Id == id && x.OwnerId == user.Id)
+                .SingleOrDefaultAsync();
+
+            if (item == null) return false;
+
+            item.IsDone = true;
+
+            var saveResult = await _context.SaveChangesAsync();
+            return saveResult == 1;
+        }
+    }
+}
