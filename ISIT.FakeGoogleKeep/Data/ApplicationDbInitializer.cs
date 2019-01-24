@@ -8,14 +8,11 @@ namespace ISIT.FakeGoogleKeep.Data
         public static async Task SeedUsersAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             string adminEmail = "admin@localhost.net";
+            string userEmail = "user@localhost.net";
             string password = "1qaz!QAZ";
             if (await roleManager.FindByNameAsync(Constants.AdministratorRole) == null)
             {
                 await roleManager.CreateAsync(new IdentityRole(Constants.AdministratorRole));
-            }
-            if (await roleManager.FindByNameAsync(Constants.UserRole) == null)
-            {
-                await roleManager.CreateAsync(new IdentityRole(Constants.UserRole));
             }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
@@ -25,6 +22,11 @@ namespace ISIT.FakeGoogleKeep.Data
                 {
                     await userManager.AddToRoleAsync(admin, Constants.AdministratorRole);
                 }
+            }
+            if (await userManager.FindByNameAsync(userEmail) == null)
+            {
+                IdentityUser user = new IdentityUser { Email = userEmail, UserName = userEmail };
+                IdentityResult result = await userManager.CreateAsync(user, password);
             }
         }
     }
